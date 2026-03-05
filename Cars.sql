@@ -1,0 +1,13 @@
+-- COUNT
+-- SUM
+-- MIN 
+-- MAX
+-- AVG
+
+-- SELECT AVG(PricePerDay) FROM cars;
+-- SELECT SUM(PricePerDay) FROM cars
+-- SELECT AVG(PricePerDay) FROM cars WHERE Color='Red';
+-- SELECT Color, AVG(PricePerDay) FROM cars GROUP BY Color;
+-- SELECT COUNT(Color) FROM cars WHERE Color = 'Red';
+-- SELECT Color, COUNT(Color) FROM cars GROUP BY Color;
+-- SELECT * From cars ORDER BY PricePerDay DESC LIMIT 1;

@@ -1,0 +1,11 @@
+-- SELECT * FROM customers;
+-- SELECT Name, BirthDate FROM customers;
+-- SELECT * FROM cars Where PricePerDay >1000;
+-- SELECT Brand, Model FROM cars WHERE Brand='Volvo';
+-- SELECT Name From customers ORDER BY Name ASC;
+-- SELECT Name FROM customers WHERE YEAR(BirthDate) >= '1990' ORDER BY BirthDate ASC;
+-- SELECT * From cars WHERE Color='Red' AND PricePerDay < 1500;
+-- SELECT Name, BirthDate FROM customers WHERE YEAR(BirthDate) BETWEEN '1970' AND '1990';
+-- SELECT * FROM bookings WHERE EndDate-StartDate >6;
+-- SELECT * From bookings WHERE StartDate >= '2018-02-01' AND EndDate <= '2018-02-25';
+-- SELECT * FROM customers WHERE Name LIKE 'O%';

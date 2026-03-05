@@ -1,0 +1,11 @@
+-- SELECT * FROM cars CROSS JOIN bookings;
+-- SELECT * FROM customer CROSS JOIN bookings;
+-- SELECT * FROM cars INNER JOIN bookings ON cars.CarNumber = bookings.CarNumber;
+-- SELECT * FROM customers INNER JOIN bookings ON customers.CustomerNumber = bookings.CustomerNumber;
+-- SELECT Name FROM customers INNER JOIN bookings ON customers.CustomerNumber = bookings.CustomerNumber ORDER BY Name ASC;
+-- SELECT DISTINCT Name FROM customers INNER JOIN bookings ON customers.CustomerNumber = bookings.CustomerNumber ORDER BY Name ASC;
+-- SELECT * FROM cars INNER JOIN bookings ON cars.CarNumber = bookings.CarNumber WHERE cars.Brand = 'Volkswagen';
+-- SELECT * FROM customers JOIN bookings ON customers.CustomerNumber = bookings.CustomerNumber INNER JOIN cars ON cars.CarNumber = bookings.CarNumber WHERE cars.Brand = 'Volkswagen';
+-- SELECT DISTINCT Model, Brand, Color FROM cars INNER JOIN bookings ON bookings.CarNumber= cars.CarNumber;
+-- SELECT * FROM cars LEFT JOIN bookings On cars.CarNumber = bookings.CarNumber WHERE bookings.CarNumber IS NULL;
+-- SELECT DISTINCT Brand, Model, Color FROM cars INNER JOIN bookings ON cars.CarNumber = bookings.CarNumber WHERE cars.Color = 'Black';
