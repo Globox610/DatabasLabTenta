@@ -443,3 +443,115 @@ WHERE bl.dateReturned IS NULL;
 SELECT * FROM ExcpectedDate;
 
 
+
+#### HÄR BÖRJAR MENTOR ADAMS TEMPLATE
+
+
+-- ==========================================
+-- NAME: ----
+-- EXAM: ----
+-- ==========================================
+
+-- ------------------------------------------
+-- UPPGIFT 1: Skapa tabeller och Insert
+-- Reflektion: [Skriv kort hur du tänkte med PK/FK här] 
+-- ------------------------------------------
+
+-- Template for creating a table with Primary and Foreign Keys
+CREATE TABLE TableName (
+    idColumn INT PRIMARY KEY,
+    nameColumn VARCHAR(255),
+    fkColumn INT,
+    FOREIGN KEY (fkColumn) REFERENCES OtherTable(idColumn)
+);
+
+-- (Insert statements provided in the exam)
+
+-- ------------------------------------------
+-- UPPGIFT 2: SELECT med JOIN
+-- Reflektion: [Kort om hur du kopplade tabellerna] 
+-- ------------------------------------------
+-- Template for a basic INNER JOIN
+SELECT A.column1, B.column2 
+FROM TableA A
+JOIN TableB B ON A.id = B.a_id;
+
+
+-- ------------------------------------------
+-- UPPGIFT 3: SELECT med Aggregation
+-- Reflektion: [Kort om varför du valde GROUP BY] 
+-- ------------------------------------------
+-- Template for counting items
+SELECT column_to_group_by, COUNT(column_to_count)
+FROM TableName
+GROUP BY column_to_group_by;
+
+
+-- ------------------------------------------
+-- UPPGIFT 4: VIEW
+-- Reflektion: [Kort om hur du filtrerade på CURDATE()]
+-- ------------------------------------------
+-- Template for creating a View
+CREATE OR REPLACE VIEW ViewName AS
+SELECT column1, MAX(column2)
+FROM TableName
+WHERE dateColumn >= CURDATE() -- active check
+GROUP BY column1;
+
+-- Test the view
+SELECT * FROM ViewName;
+
+
+-- ------------------------------------------
+-- UPPGIFT 5: TRIGGER
+-- Reflektion: [Kort om hur triggern uppdaterar datumet] 
+-- ------------------------------------------
+-- Template for a Trigger (Kom ihåg DELIMITER!)
+DELIMITER //
+CREATE TRIGGER TriggerName
+AFTER INSERT ON BidTable -- or BEFORE INSERT depending on logic
+FOR EACH ROW
+BEGIN
+    -- Logic to check if NEW.bidDate = Item.lastBidDate
+    -- UPDATE ItemTable SET lastBidDate = lastBidDate + INTERVAL 1 DAY WHERE ... 
+END //
+DELIMITER ;
+
+-- Test with an insert
+-- INSERT INTO ...
+
+
+-- ------------------------------------------
+-- UPPGIFT 6: FUNKTION 
+-- Reflektion: [Kort om IF/ELSE logiken för 10% vs 20%]
+-- ------------------------------------------
+-- Template for a Function calculating revenue
+DELIMITER //
+CREATE FUNCTION CalculateRevenue(finalPrice DECIMAL) 
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE revenue DECIMAL(10,2);
+    
+    IF finalPrice < 1000 THEN [cite: 113]
+        SET revenue = finalPrice * 0.20; [cite: 113]
+    ELSE
+        SET revenue = finalPrice * 0.10; [cite: 113]
+    END IF;
+    
+    RETURN revenue;
+END //
+DELIMITER ;
+
+-- Test the function
+SELECT CalculateRevenue(800); 
+
+
+-- ------------------------------------------
+-- UPPGIFT 7: Avancerad SELECT (OUTER JOIN)
+-- Reflektion: [Kort om varför du använde LEFT/RIGHT JOIN för att visa alla]
+-- ------------------------------------------
+-- Template to show ALL records from Table A, even if no match in Table B
+SELECT A.name, B.data
+FROM TableA A
+LEFT JOIN TableB B ON A.id = B.a_id;
