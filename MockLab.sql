@@ -216,7 +216,7 @@ BEGIN
     DECLARE v_overdue INT;
     SELECT 
         GREATEST(0, DATEDIFF(
-            dateReturned,  -- if NULL, use today
+            dateReturned,
             DATE_ADD(startDate, INTERVAL leaseInDays DAY)
         ))
     INTO v_overdue
@@ -226,12 +226,43 @@ BEGIN
 END //
 DELIMITER ;
 
+-- v2
+DELIMITER //
+
+CREATE FUNCTION getOverdueDays(p_leaseNumber INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE v_overdue INT;
+    
+    SELECT DATEDIFF(dateReturned, DATE_ADD(startDate, INTERVAL leaseInDays DAY))
+    INTO v_overdue
+    FROM BookLease
+    WHERE leaseNumber = p_leaseNumber;
+    
+    IF v_overdue < 0 THEN SET v_overdue = 0; END IF;
+    
+    RETURN v_overdue;
+END //
+
+DELIMITER ;
 -- to show full list
-SELECT bl.leaseNumber, bl.ISBN, 
-	s.Fname, s.Lname, 
+SELECT 
+    bl.leaseNumber,
+    bl.ISBN,
+    s.Fname,
+    s.Lname,
     getOverdueDays(bl.leaseNumber) AS numOfOverdueDays,
     getOverdueDays(bl.leaseNumber) * 12.5 AS totalAmount
 FROM BookLease bl
 JOIN Student s ON bl.stNum = s.stNum
+WHERE bl.dateReturned IS NOT NULL
 HAVING numOfOverdueDays > 0;
 
+
+SELECT getOverdueDays(6);
+DROP FUNCTION IF EXISTS getOverdueDays;
+SHOW FUNCTION STATUS WHERE Name = 'getOverdueDays';
+
+SELECT leaseNumber, dateReturned FROM BookLease WHERE leaseNumber = 6;
+UPDATE BookLease SET dateReturned = NULL WHERE leaseNumber = 6;
